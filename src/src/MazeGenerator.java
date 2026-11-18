@@ -12,12 +12,11 @@ public class MazeGenerator {
         }
         maze = new char[rows][cols];
         for (char[] row : maze) {
-            Arrays.fill(row, '#');
+            Arrays.fill(row, '*');
         }
         dfs(1, 1);
         return maze;
     }
-
     private void dfs(int r, int c) {
         maze[r][c] = ' ';
         int[][] dirs = {{0, 2}, {0, -2}, {2, 0}, {-2, 0}};
@@ -30,10 +29,9 @@ public class MazeGenerator {
         for (int[] d : dirs) {
             int nr = r + d[0];
             int nc = c + d[1];
-
             if (nr > 0 && nr < maze.length - 1 &&
                     nc > 0 && nc < maze[0].length - 1 &&
-                    maze[nr][nc] == '#') {
+                    maze[nr][nc] == '*') {
 
                 maze[r + d[0] / 2][c + d[1] / 2] = ' ';
                 dfs(nr, nc);
@@ -42,7 +40,7 @@ public class MazeGenerator {
     }
     public static void main(String[] args) {
         MazeGenerator generator = new MazeGenerator();
-        char[][] maze = generator.generate(21, 21);
+        char[][] maze = generator.generate(51, 51);
         for (int r = 0; r < maze.length; r++) {
             for (int c = 0; c < maze[r].length; c++) {
                 System.out.print(maze[r][c]);
